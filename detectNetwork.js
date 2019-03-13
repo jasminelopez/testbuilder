@@ -44,6 +44,14 @@ var detectNetwork = function(cardNumber) {
        return "MasterCard";
      }
    }
+   if (cardNumber.slice(0, 4) == 6011 || (cardNumber.slice(0, 3) >= 644 && cardNumber.slice(0, 3) <= 649) || cardNumber.slice(0, 2) == 65) {
+     if (cardNumber.length === 16 || cardNumber.length === 19) {
+       return "Discover";
+     }
+   }
+
+    //Discover always has a prefix of 6011, 644-649, or 65, and a length of 16 or 19.
+    // Maestro always has a prefix of 5018, 5020, 5038, or 6304, and a length of 12-19.
 
   // Once you've read this, go ahead and try to implement this function, then return to the console.
 };
