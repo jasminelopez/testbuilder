@@ -17,6 +17,12 @@ var detectNetwork = function(cardNumber) {
     //Heads up! Switch and Visa seem to have some overlapping card numbers
     //in any apparent conflict, you should choose the network with the longer prefix.
 
+  if (cardNumber.slice(0, 2) == 38 || cardNumber.slice(0, 2) == 39) {
+    if (cardNumber.length === 14) {
+      return 'Diner\'s Club';
+    }
+  }   
+
   if (cardNumber.slice(0, 4) == 4903 || 
       cardNumber.slice(0, 4) == 4905 || 
       cardNumber.slice(0, 4) == 4911 || 
@@ -28,7 +34,7 @@ var detectNetwork = function(cardNumber) {
     if (cardNumber.length === 16 || cardNumber.length === 19 || cardNumber.length === 18) {
       return "Switch";
     }
-   }   
+  } 
 
   //China UnionPay always has a prefix of 622126-622925, 624-626, or 6282-6288 and a length of 16-19.
 
@@ -38,16 +44,11 @@ var detectNetwork = function(cardNumber) {
        cardNumber.slice(0, 6) <= 622925) ||
        (cardNumber.slice(0, 4) >= 6282 && 
        cardNumber.slice(0, 4) <= 6288)) {
-     if (cardNumber.length === 16 || cardNumber.length === 17 || cardNumber.length === 18 || cardNumber.length === 19) {
+     if (cardNumber.length >= 16 && cardNumber.length <= 19) {
        return "China UnionPay";
      }
    }
-
-   if (cardNumber.slice(0, 2) == 38 || cardNumber.slice(0, 2) == 39) {
-     if (cardNumber.length === 14) {
-       return "Diner's Club";
-     }
-   }  
+ 
    if (cardNumber.slice(0, 2) == 34 || cardNumber.slice(0, 2) == 37) {
    	 if (cardNumber.length === 15) {
        return "American Express";
